@@ -2,16 +2,49 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react';
+import ReactDom from 'react-dom';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+class ContentFeed extends React.component {
+    constructor () {
+      super();
+
+      this.state = {
+            'music': []
+        }
+    }
+    componentDidMount(){
+        this.getMusic();
+    }
+
+getMusic(){
+    fetch('http://devcodecampmusiclibrary.com/')
+    .then(results => results.json())
+    .then(results => this.setState({'music': results}));
+   }
+render(){
+    return (
+      <ul>
+        {this.state.music.map(function(music, index) {
+          return (
+            <div key={id+index}>
+              <h1>{music.title}</h1>
+              <p>{music.artist}</p>
+            </div>
+          )
+        } )}
+      </ul>
+    );
+    }
+}
+ReactDom.render(
+    <ContentFeed />,
+    document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+
+
+
+
+
+
