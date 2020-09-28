@@ -1,25 +1,47 @@
+import React, { Component } from "react";
 import axios from 'axios';
-import React from 'react';
-import { AppState, StyleSheet, Text, View } from "react-native";
 import './App.css';
+import {  Table } from "semantic-ui-react";
 
-function App() {
-  return (
-    <div className="App">
+axios({
+  method: 'get',
+  url: 'http://devcodecampmusiclibrary.com/',
+  data: {
+  
+  }
+});
 
+class App extends Component {
 
-    </div>
-  );
+  render() {
+    return (
+      <Table singleLine>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Title</Table.HeaderCell>
+            <Table.HeaderCell>Artist</Table.HeaderCell>
+            <Table.HeaderCell>Genre</Table.HeaderCell>
+            <Table.HeaderCell>Email</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          {contacts.map(el => {
+            return (
+              <Table.Row key={el.id}>
+                <Table.Cell>{el.id}</Table.Cell>
+                <Table.Cell>
+                  {el.firstname} {el.lastname}
+                </Table.Cell>
+                <Table.Cell>{el.phone}</Table.Cell>
+                <Table.Cell>{el.email}</Table.Cell>
+              </Table.Row>
+            );
+          })}
+        </Table.Body>
+      </Table>
+    );
+  }
 }
-
-
-useEffect(() => {
-  setAppState({ loading: true });
-  const apiUrl = 'http://devcodecampmusiclibrary.com/';
-  axios.get(apiUrl).then((repos) => {
-    const allRepos = repos.data;
-    setAppState({ loading: false, repos: allRepos });
-  });
-}, [setAppState]);
 
 export default App;
